@@ -33,7 +33,7 @@ namespace SistemaFinanceiro.Models
         public string Complemento { get; set; }
 
         [Column("EMP_NUME")]
-        public int Numero { get; set; }
+        public string Numero { get; set; }
 
         [Column("EMP_CEP")]
         public string Cep { get; set; }

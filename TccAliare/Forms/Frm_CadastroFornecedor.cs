@@ -250,7 +250,7 @@ namespace TccAliare.Forms
             endereco.Complemento = txtComplemento.Text;
             endereco.Logradouro = txtLogradouro.Text;
             endereco.Cep = mskCep.Text.Replace("-", "");
-            endereco.Numero = int.Parse(txtNumero.Text);
+            endereco.Numero = txtNumero.Text;
             endereco.Cidade = cidade;
 
             fornecedor.Nome = txtNomeRazao.Text;

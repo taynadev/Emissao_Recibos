@@ -17,7 +17,7 @@ namespace TccAliare.Impressao
         private string nomeRecebedor;
         private string cpfCnpjRecebedor;
         private string Logradouro;
-        private int Numero;
+        private string Numero;
         private string Bairro;
         private string Complemento;
         private string Cep;
