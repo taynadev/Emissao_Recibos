@@ -42,7 +42,8 @@ namespace TccAliare.Forms
         private void btnRecibo_Click(object sender, EventArgs e)
         {           
             var id = dgvTitulos.Rows[dgvTitulos.CurrentCell.RowIndex].Cells["ID"].Value;
-            Imprimir recibo = new Imprimir();
+            //Imprimir recibo = new Imprimir();
+            FastReport_Imprime recibo = new FastReport_Imprime();
             if (rbRecebedor.Checked)
             {
                 recibo.DadosRecibo(((int)id));

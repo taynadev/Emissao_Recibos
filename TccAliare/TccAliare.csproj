@@ -35,6 +35,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FastReport, Version=2022.1.9.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\DIVERSOS\OneDrive\OneDrive - SIAGRI SISTEMAS DE GESTAO LTDA\Área de Trabalho\PROJETOS\FASTREPORT\FastReport.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Bars, Version=2022.1.9.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\DIVERSOS\OneDrive\OneDrive - SIAGRI SISTEMAS DE GESTAO LTDA\Área de Trabalho\PROJETOS\FASTREPORT\FastReport.Bars.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Editor, Version=2022.1.9.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\DIVERSOS\OneDrive\OneDrive - SIAGRI SISTEMAS DE GESTAO LTDA\Área de Trabalho\PROJETOS\FASTREPORT\FastReport.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -221,6 +233,7 @@
       <DependentUpon>Frm_Principal.cs</DependentUpon>
     </Compile>
     <Compile Include="Impressao\Conversor.cs" />
+    <Compile Include="Impressao\FastReport_Imprime.cs" />
     <Compile Include="Impressao\Imprimir.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -11,7 +11,7 @@ namespace SistemaFinanceiro.Models
         public int Id { get; set; }
 
         [Column("END_NUME")]
-        public int Numero { get; set; }
+        public string Numero { get; set; }
 
         [Column("END_BAIR")]
         public string Bairro { get; set; }

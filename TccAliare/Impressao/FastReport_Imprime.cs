@@ -1,19 +1,17 @@
 ﻿using Aliare.DataBase.Repositories;
-using SistemaFinanceiro.Models;
+using FastReport;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace TccAliare.Impressao
 {
-    public class Imprimir
+    public class FastReport_Imprime
     {
-        PrintDocument document;
+
         private string nomeRecebedor;
         private string cpfCnpjRecebedor;
         private string Logradouro;
@@ -30,14 +28,6 @@ namespace TccAliare.Impressao
         private string descricao;
         private string cidadeEmpresa;
         private string UFEmpresa;
-
-        public Imprimir()
-        {
-            document = new PrintDocument();
-            document.PrintController = new StandardPrintController();
-            document.DocumentName = "Comprovante";
-        }
-
         public void DadosRecibo(int id)
         {
             RecebedorRepository recebedorRepository = new RecebedorRepository();
@@ -64,14 +54,9 @@ namespace TccAliare.Impressao
             Estado = receber.Empresa.Cidade.Uf;
             cidadeEmpresa = receber.Empresa.Cidade.Nome;
             UFEmpresa = receber.Empresa.Cidade.Uf;
-            document.PrintPage += new PrintPageEventHandler(PrintDocument_PrintPage);
 
-            PrintPreviewDialog dialog = new PrintPreviewDialog();
-            dialog.Document = document;
-            (dialog as Form).WindowState = FormWindowState.Maximized;
-            dialog.ShowDialog();
+            Imprimir();
         }
-
         public void DadosPagamento(int id)
         {
             PagarRepository pagarRepository = new PagarRepository();
@@ -99,19 +84,15 @@ namespace TccAliare.Impressao
 
             cidadeEmpresa = pagamento.Empresa.Cidade.Nome;
             UFEmpresa = pagamento.Empresa.Cidade.Uf;
-            document.PrintPage += new PrintPageEventHandler(PrintDocument_PrintPage);
 
-            PrintPreviewDialog dialog = new PrintPreviewDialog();
-            dialog.Document = document;
-            (dialog as Form).WindowState = FormWindowState.Maximized;
-            dialog.ShowDialog();
+            Imprimir();
         }
-
-        public void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
+        public void Imprimir()
         {
             valorExtenso = Conversor.EscreverExtenso(valor);
-
-            string texto =
+            TextoFormatado textoformatado = new TextoFormatado()
+            {
+                Texto_formatado =
                     $"Eu {nomeRecebedor} ({cpfCnpjRecebedor}), localizado em " +
                     (string.IsNullOrEmpty(Logradouro) ? "" : Logradouro + ", ") +
                     (string.IsNullOrEmpty(Numero.ToString()) ? "" : Numero.ToString() + ", ") +
@@ -123,32 +104,23 @@ namespace TccAliare.Impressao
                     $"declaro para os devidos fins que recebi de " +
                     $"{nomePagador} ({CpfCnpjPagador}), o valor de R$ {valor}" +
                     $" ({valorExtenso})" +
-                    (string.IsNullOrEmpty(descricao) ? "." : ", em virtude de " + descricao + ".");
-
-            string dataCompleta = cidadeEmpresa + " - " + UFEmpresa + ", " + DateTime.Now.ToString("dd/MM/yyyy");
-            string linhaAssintura = ("\n\n\n\n_______________________________________________\n\n");
-
-            StringFormat sf = new StringFormat();
-
-            sf.Alignment = StringAlignment.Center;
-
-            //Captura todo o retângulo dos limites da página
-            RectangleF rect = e.PageBounds;
-
-            //Aumenta a coordenada de localização Y
-            rect.Y += 100;
-            rect.X += 40;
-            rect.Width -= 60;
-
-            e.Graphics.DrawString("Recibo", new Font("Arial", 18, FontStyle.Bold), Brushes.Black, rect, sf);
-            rect.Y += 100;
-            e.Graphics.DrawString(texto, new Font("Arial", 14, FontStyle.Regular), Brushes.Black, rect, sf);
-            rect.Y += 150;
-            sf.Alignment = StringAlignment.Near;
-            e.Graphics.DrawString(dataCompleta, new Font("Arial", 14, FontStyle.Regular), Brushes.Black, rect, sf);
-            rect.Y += 50;
-            sf.Alignment = StringAlignment.Center;
-            e.Graphics.DrawString(linhaAssintura + nomePagador + linhaAssintura + nomeRecebedor, new Font("Arial", 14, FontStyle.Regular), Brushes.Black, rect, sf);
+                    (string.IsNullOrEmpty(descricao) ? "." : ", em virtude de " + descricao + "."),
+                DataCompleta = cidadeEmpresa + " - " + UFEmpresa + ", " + DateTime.Now.ToString("dd/MM/yyyy"),
+                ValorExtenso = valorExtenso
+            };
+            using (Report report = new Report())
+            {
+                report.Load("Untitled.frx");
+                report.RegisterData(new[] { textoformatado }, "cliente");
+                report.Design();
+            }
         }
+        public class TextoFormatado
+        {
+            public string Texto_formatado { get; set; }
+            public string DataCompleta { get; set; }
+            public string ValorExtenso { get; set; }
+        }
+
     }
 }
