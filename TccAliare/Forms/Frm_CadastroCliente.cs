@@ -243,49 +243,159 @@ namespace TccAliare.Forms
 
         }
 
+        #region Botão cadastrar e validações
+
         private void btnCadastrar_Click (object sender, EventArgs e)
         {
-            var cliente = new ClienteModel();
-            var endereco = new EnderecoModel();
-            var receber = new ReceberModel();
-            var cidade = new CidadeModel();
+            string conteudoCPF;
+            conteudoCPF = mskCpfCnpj.Text;
+            conteudoCPF = conteudoCPF.Replace(".", "").Replace("-", "");
+            conteudoCPF = conteudoCPF.Trim();
 
-            var rp_cliente = new ClienteRepository();
-            var rp_receber = new RecebedorRepository();
+            string conteudoCNPJ = mskCpfCnpj.Text;
+            conteudoCNPJ = conteudoCNPJ.Replace(".", "");
+            conteudoCNPJ = conteudoCNPJ.Replace("/", "");
+            conteudoCNPJ = conteudoCNPJ.Replace("-", "");
+            conteudoCNPJ = conteudoCNPJ.Trim();
 
-            cidade.Nome = txtCidade.Text;
-            cidade.Uf = txtEstado.Text;
+            string conteudoCEP = mskCep.Text;
+            conteudoCEP = conteudoCEP.Replace("-", "").Replace("_", "");
+            conteudoCEP = conteudoCEP.Trim();
 
-            endereco.Bairro = txtBairro.Text;
-            endereco.Complemento = txtComplemento.Text;
-            endereco.Logradouro = txtLogradouro.Text;
-            endereco.Cep = mskCep.Text.Replace("-", "");
-            endereco.Numero = txtNumero.Text;
-            endereco.Cidade = cidade;
+            string conteudoValorDoc = mskValorDoc.Text;
+            conteudoValorDoc = conteudoValorDoc.Replace("-", "").Replace("_", "").Replace("R$", "");
+            conteudoValorDoc = conteudoValorDoc.Trim();
 
-            cliente.Nome = txtNomeRazao.Text;
-            cliente.CpfCnpj = mskCpfCnpj.Text.Replace(".", "").Replace("-", "").Replace("/", "");
-            ;
-            cliente.Endereco = endereco;
 
-            rp_cliente.Add(cliente);
-            rp_cliente.Save();
-
-            if (ckbSim.Checked)
+            if (txtNomeRazao.Text == "" || conteudoCPF == "" || conteudoCNPJ == "" || conteudoCEP == "")
             {
-                receber.EmpresaId = 3;
-                receber.ClienteId = cliente.Id;
-                receber.Numero = txtNumDoc.Text;
-                receber.Observacao = txtObs.Text;
-                receber.Data = DateTime.Now;
-                receber.Status = "A";
-                receber.Valor = decimal.Parse(mskValorDoc.Text.Replace("R$", "").Replace(".", "").Replace(".", ""));
+                errorProvider.SetError(txtNomeRazao, "Preencha o campo");
+                errorProvider.SetError(mskCpfCnpj, "Preencha o campo");
+                errorProvider.SetError(mskCep, "Preencha o campo");
 
-                rp_receber.Add(receber);
-                rp_receber.Save();
+                MessageBox.Show("Há campos obrigatorios a serem preenchidos", "Mensagem de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            btnLimpar_Click(sender, e);
+            else if (ckbSim.Checked)
+            {
+                if (conteudoValorDoc == "")
+                {
+                    errorProvider.SetError(mskValorDoc, "Preencha o campo");
+
+                    MessageBox.Show("Há campos obrigatorios a serem preenchidos", "Mensagem de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    var cliente = new ClienteModel();
+                    var endereco = new EnderecoModel();
+                    var receber = new ReceberModel();
+                    var cidade = new CidadeModel();
+
+                    var rp_cliente = new ClienteRepository();
+                    var rp_receber = new RecebedorRepository();
+
+                    cidade.Nome = txtCidade.Text;
+                    cidade.Uf = txtEstado.Text;
+
+                    endereco.Bairro = txtBairro.Text;
+                    endereco.Complemento = txtComplemento.Text;
+                    endereco.Logradouro = txtLogradouro.Text;
+                    endereco.Cep = mskCep.Text.Replace("-", "");
+                    endereco.Numero = txtNumero.Text;
+                    endereco.Cidade = cidade;
+
+                    cliente.Nome = txtNomeRazao.Text;
+                    cliente.CpfCnpj = mskCpfCnpj.Text.Replace(".", "").Replace("-", "").Replace("/", "");
+                    ;
+                    cliente.Endereco = endereco;
+
+                    rp_cliente.Add(cliente);
+                    rp_cliente.Save();
+
+
+                    receber.EmpresaId = 1;
+                    receber.ClienteId = cliente.Id;
+                    receber.Numero = txtNumDoc.Text;
+                    receber.Observacao = txtObs.Text;
+                    receber.Data = DateTime.Now;
+                    receber.Status = "A";
+                    receber.Valor = decimal.Parse(mskValorDoc.Text.Replace("R$", "").Replace(".", "").Replace(".", ""));
+
+                    rp_receber.Add(receber);
+                    rp_receber.Save();
+
+                    MessageBox.Show("Dados salvos", "Mensagem de Validação", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+                    btnLimpar_Click(sender, e);
+                }
+            }
+            else
+            {
+                var cliente = new ClienteModel();
+                var endereco = new EnderecoModel();
+                var receber = new ReceberModel();
+                var cidade = new CidadeModel();
+
+                var rp_cliente = new ClienteRepository();
+                var rp_receber = new RecebedorRepository();
+
+                cidade.Nome = txtCidade.Text;
+                cidade.Uf = txtEstado.Text;
+
+                endereco.Bairro = txtBairro.Text;
+                endereco.Complemento = txtComplemento.Text;
+                endereco.Logradouro = txtLogradouro.Text;
+                endereco.Cep = mskCep.Text.Replace("-", "");
+                endereco.Numero = txtNumero.Text;
+                endereco.Cidade = cidade;
+
+                cliente.Nome = txtNomeRazao.Text;
+                cliente.CpfCnpj = mskCpfCnpj.Text.Replace(".", "").Replace("-", "").Replace("/", "");
+                ;
+                cliente.Endereco = endereco;
+
+                rp_cliente.Add(cliente);
+                rp_cliente.Save();
+
+                MessageBox.Show("Dados salvos", "Mensagem de Validação", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+                btnLimpar_Click(sender, e);
+            }
+
         }
+        #endregion
+
+        #region Impedir o usuário de dar espaço
+
+        private void mskCpfCnpj_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                return;
+            }
+        }
+
+        private void mskCep_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                return;
+            }
+        }
+
+        private void mskValorDoc_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                return;
+            }
+        }
+        #endregion
 
         #region Altera a Mascara do Valor do Documento
 
@@ -338,5 +448,7 @@ namespace TccAliare.Forms
         }
 
         #endregion
+
+        
     }
 }

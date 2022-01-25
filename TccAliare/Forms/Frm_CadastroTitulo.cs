@@ -39,34 +39,52 @@ namespace TccAliare.Forms
             {
                 ClienteRepository clienteRepository = new ClienteRepository();
                 var cliente = clienteRepository.GetByCpfCnpj(txtPesquisa.Text);
-                id = cliente.Id;
 
-                txtNomeRazao.Text = cliente.Nome;
-                mskCpfCnpj.Text = cliente.CpfCnpj;
-                txtLogradouro.Text = cliente.Endereco.Logradouro;
-                txtBairro.Text = cliente.Endereco.Bairro;
-                mskCep.Text = cliente.Endereco.Cep;
-                txtComplemento.Text = cliente.Endereco.Complemento;
-                txtNumero.Text = cliente.Endereco.Numero.ToString();
-                txtCidade.Text = cliente.Endereco.Cidade.Nome;
-                txtEstado.Text = cliente.Endereco.Cidade.Uf;
+                if (cliente == null)
+                {
+                    MessageBox.Show("Dados não encontrados, verifique se digitou corretamente", "Mensagem de validação", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    id = cliente.Id;
+
+                    txtNomeRazao.Text = cliente.Nome;
+                    mskCpfCnpj.Text = cliente.CpfCnpj;
+                    txtLogradouro.Text = cliente.Endereco.Logradouro;
+                    txtBairro.Text = cliente.Endereco.Bairro;
+                    mskCep.Text = cliente.Endereco.Cep;
+                    txtComplemento.Text = cliente.Endereco.Complemento;
+                    txtNumero.Text = cliente.Endereco.Numero.ToString();
+                    txtCidade.Text = cliente.Endereco.Cidade.Nome;
+                    txtEstado.Text = cliente.Endereco.Cidade.Uf;
+                }
+                
             }
 
             if (rbPagar.Checked)
             {
                 FornecedorRepository fornecedorRepository = new FornecedorRepository();
                 var fornecedor = fornecedorRepository.GetByCnpjCpf(txtPesquisa.Text);
-                id = fornecedor.Id;
 
-                txtNomeRazao.Text = fornecedor.Nome;
-                txtLogradouro.Text = fornecedor.Endereco.Logradouro;
-                txtBairro.Text = fornecedor.Endereco.Bairro;
-                mskCpfCnpj.Text = fornecedor.CnpjCpf;
-                mskCep.Text = fornecedor.Endereco.Cep;
-                txtComplemento.Text = fornecedor.Endereco.Complemento;
-                txtNumero.Text = fornecedor.Endereco.Numero.ToString();
-                txtCidade.Text = fornecedor.Endereco.Cidade.Nome;
-                txtEstado.Text = fornecedor.Endereco.Cidade.Uf;
+                if (fornecedor == null)
+                {
+                    MessageBox.Show("Dados não encontrados, verifique se digitou corretamente", "Mensagem de validação", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    id = fornecedor.Id;
+
+                    txtNomeRazao.Text = fornecedor.Nome;
+                    txtLogradouro.Text = fornecedor.Endereco.Logradouro;
+                    txtBairro.Text = fornecedor.Endereco.Bairro;
+                    mskCpfCnpj.Text = fornecedor.CnpjCpf;
+                    mskCep.Text = fornecedor.Endereco.Cep;
+                    txtComplemento.Text = fornecedor.Endereco.Complemento;
+                    txtNumero.Text = fornecedor.Endereco.Numero.ToString();
+                    txtCidade.Text = fornecedor.Endereco.Cidade.Nome;
+                    txtEstado.Text = fornecedor.Endereco.Cidade.Uf;
+                }
+                
             }
         }
 
@@ -124,40 +142,73 @@ namespace TccAliare.Forms
            
         }
 
+        #region Botão cadastrar
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
+            string conteudoValorDoc = mskValorDoc.Text;
+            conteudoValorDoc = conteudoValorDoc.Replace("-", "").Replace("_", "").Replace("R$", "").Replace(".", "");
+            conteudoValorDoc = conteudoValorDoc.Trim();
+
             if (rbReceber.Checked)
             {
-                ReceberModel receber = new ReceberModel();
-                RecebedorRepository con = new RecebedorRepository();
-                receber.EmpresaId = 3;
-                receber.ClienteId = id;
-                receber.Numero = txtNumDoc.Text;
-                receber.Valor = Decimal.Parse(mskValorDoc.Text.Replace("R$", "").Replace(".", "").Replace(".", ""));
-                receber.Observacao = txtObs.Text;
-                receber.Data = DateTime.Now;
-                receber.Status = "A";
+                if (txtNomeRazao.Text == "" || conteudoValorDoc == "")
+                {
+                    errorProvider.SetError(txtPesquisa, "Preencha o campo");
+                    errorProvider.SetError(mskValorDoc, "Preencha o campo");
+                    MessageBox.Show("Há campos necessários para serem preenchidos", "Mensagem de validação", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                con.Add(receber);
-                con.Save();
+                }
+                else
+                {
+                    ReceberModel receber = new ReceberModel();
+                    RecebedorRepository con = new RecebedorRepository();
+                    receber.EmpresaId = 1;
+                    receber.ClienteId = id;
+                    receber.Numero = txtNumDoc.Text;
+                    receber.Valor = Decimal.Parse(mskValorDoc.Text.Replace("R$", "").Replace(".", "").Replace(".", ""));
+                    receber.Observacao = txtObs.Text;
+                    receber.Data = DateTime.Now;
+                    receber.Status = "A";
+
+                    con.Add(receber);
+                    con.Save();
+
+                    MessageBox.Show("Salvo com sucesso", "Mensagem de validação", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }
+                
             }
 
             if (rbPagar.Checked)
             {
-                PagarModel pagar = new PagarModel();
-                PagarRepository con = new PagarRepository();
-                pagar.EmpresaId = 3;
-                pagar.FornecedorId = id;
-                pagar.Numero = txtNumDoc.Text;
-                pagar.Valor = Decimal.Parse(mskValorDoc.Text.Replace("R$", "").Replace(".", "").Replace(".", ""));
-                pagar.Observacao = txtObs.Text;
-                pagar.Data = DateTime.Now;
-                pagar.Status = "A";
+                if (txtNomeRazao.Text == "" || conteudoValorDoc == "")
+                {
+                    errorProvider.SetError(txtPesquisa, "Preencha o campo");
+                    errorProvider.SetError(mskValorDoc, "Preencha o campo");
+                    MessageBox.Show("Há campos necessários para serem preenchidos", "Mensagem de validação", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                con.Add(pagar);
-                con.Save();
+                }
+                else
+                {
+                    PagarModel pagar = new PagarModel();
+                    PagarRepository con = new PagarRepository();
+                    pagar.EmpresaId = 1;
+                    pagar.FornecedorId = id;
+                    pagar.Numero = txtNumDoc.Text;
+                    pagar.Valor = Decimal.Parse(mskValorDoc.Text.Replace("R$", "").Replace(".", "").Replace(".", ""));
+                    pagar.Observacao = txtObs.Text;
+                    pagar.Data = DateTime.Now;
+                    pagar.Status = "A";
+
+                    con.Add(pagar);
+                    con.Save();
+
+                    MessageBox.Show("Salvo com sucesso", "Mensagem de validação", MessageBoxButtons.OK, MessageBoxIcon.None);
+                }
+
+                
             }
         }
+        #endregion
 
         private void lblValor_Click(object sender, EventArgs e)
         {
@@ -214,5 +265,15 @@ namespace TccAliare.Forms
         }
 
         #endregion
+
+        private void mskValorDoc_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                return;
+            }
+        }
     }
 }
