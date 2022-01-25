@@ -15,7 +15,7 @@ namespace SistemaFinanceiro.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)      // Reescreve metodo OnConfiguring, passando a string de conexão com o banco;
         {
-            optionsBuilder.UseSqlServer(@"Data Source=localhost;Initial Catalog=SISTEMA_FINANCEIRO;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=NTB-B56D2L3;Initial Catalog=SISTEMA_FINANCEIRO;Integrated Security=True");
             base.OnConfiguring(optionsBuilder);
         }
 

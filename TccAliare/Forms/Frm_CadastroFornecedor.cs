@@ -233,49 +233,156 @@ namespace TccAliare.Forms
 
         #endregion
 
+        #region Botão Cadastrar e validações
+
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            var fornecedor = new FornecedorModel();
-            var endereco = new EnderecoModel();
-            var pagar = new PagarModel();
-            var cidade = new CidadeModel();
+            string conteudoCPF;
+            conteudoCPF = mskCpfCnpj.Text;
+            conteudoCPF = conteudoCPF.Replace(".", "").Replace("-", "");
+            conteudoCPF = conteudoCPF.Trim();
 
-            var rp_fornecedor = new FornecedorRepository();
-            var rp_pagar = new PagarRepository();
+            string conteudoCNPJ = mskCpfCnpj.Text;
+            conteudoCNPJ = conteudoCNPJ.Replace(".", "");
+            conteudoCNPJ = conteudoCNPJ.Replace("/", "");
+            conteudoCNPJ = conteudoCNPJ.Replace("-", "");
+            conteudoCNPJ = conteudoCNPJ.Trim();
 
-            cidade.Nome = txtCidade.Text;
-            cidade.Uf = txtEstado.Text;
+            string conteudoCEP = mskCep.Text;
+            conteudoCEP = conteudoCEP.Replace("-", "").Replace("_", "");
+            conteudoCEP = conteudoCEP.Trim();
 
-            endereco.Bairro = txtBairro.Text;
-            endereco.Complemento = txtComplemento.Text;
-            endereco.Logradouro = txtLogradouro.Text;
-            endereco.Cep = mskCep.Text.Replace("-", "");
-            endereco.Numero = txtNumero.Text;
-            endereco.Cidade = cidade;
+            string conteudoValorDoc = mskValorDoc.Text;
+            conteudoValorDoc = conteudoValorDoc.Replace("-", "").Replace("_", "").Replace("R$", "");
+            conteudoValorDoc = conteudoValorDoc.Trim();
 
-            fornecedor.Nome = txtNomeRazao.Text;
-            fornecedor.CnpjCpf = mskCpfCnpj.Text.Replace(".", "").Replace("-", "").Replace("/", "");
-            fornecedor.Endereco = endereco;
-
-            rp_fornecedor.Add(fornecedor);
-            rp_fornecedor.Save();
-
-            if (ckbSim.Checked)
+            if (txtNomeRazao.Text == "" || conteudoCPF == "" || conteudoCNPJ == "" || conteudoCEP == "")        // Valida se o usuário preencheu todos os campos necessários
             {
-                pagar.EmpresaId = 3;
-                pagar.FornecedorId = fornecedor.Id;
-                pagar.Numero = txtNumDoc.Text;
-                pagar.Observacao = txtObs.Text;
-                pagar.Data = DateTime.Now;
-                pagar.Status = "A";
-                pagar.Valor = decimal.Parse(mskValorDoc.Text.Replace("R$", "").Replace(".", "").Replace(".", ""));
+                errorProvider.SetError(txtNomeRazao, "Preencha o campo");
+                errorProvider.SetError(mskCpfCnpj, "Preencha o campo");
+                errorProvider.SetError(mskCep, "Preencha o campo");
 
-                rp_pagar.Add(pagar);
-                rp_pagar.Save();
-            }            
-            btnLimpar_Click(sender, e);            
+                MessageBox.Show("Há campos obrigatorios a serem preenchidos", "Mensagem de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (ckbSim.Checked)                   //Valida se o usuário quer gerar um título apartir do cadastro do fornecedor
+            {
+                if (conteudoValorDoc == "")              //validar se há algum valor inserido no campo valor
+                {
+                    errorProvider.SetError(mskValorDoc, "Preencha o campo");
+
+                    MessageBox.Show("Há campos obrigatorios a serem preenchidos", "Mensagem de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    var fornecedor = new FornecedorModel();
+                    var endereco = new EnderecoModel();
+                    var pagar = new PagarModel();
+                    var cidade = new CidadeModel();
+
+                    var rp_fornecedor = new FornecedorRepository();
+                    var rp_pagar = new PagarRepository();
+
+                    cidade.Nome = txtCidade.Text;
+                    cidade.Uf = txtEstado.Text;
+
+                    endereco.Bairro = txtBairro.Text;
+                    endereco.Complemento = txtComplemento.Text;
+                    endereco.Logradouro = txtLogradouro.Text;
+                    endereco.Cep = mskCep.Text.Replace("-", "");
+                    endereco.Numero = txtNumero.Text;
+                    endereco.Cidade = cidade;
+
+                    fornecedor.Nome = txtNomeRazao.Text;
+                    fornecedor.CnpjCpf = mskCpfCnpj.Text.Replace(".", "").Replace("-", "").Replace("/", "");
+                    fornecedor.Endereco = endereco;
+
+                    rp_fornecedor.Add(fornecedor);
+                    rp_fornecedor.Save();
+
+
+                    pagar.EmpresaId = 1;
+                    pagar.FornecedorId = fornecedor.Id;
+                    pagar.Numero = txtNumDoc.Text;
+                    pagar.Observacao = txtObs.Text;
+                    pagar.Data = DateTime.Now;
+                    pagar.Status = "A";
+                    pagar.Valor = decimal.Parse(mskValorDoc.Text.Replace("R$", "").Replace(".", "").Replace(".", ""));
+
+                    rp_pagar.Add(pagar);
+                    rp_pagar.Save();
+
+
+                    MessageBox.Show("Dados salvos", "Mensagem de Validação", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+                    btnLimpar_Click(sender, e);
+                }
+            }
+            else
+            {
+                var fornecedor = new FornecedorModel();
+                var endereco = new EnderecoModel();
+                var pagar = new PagarModel();
+                var cidade = new CidadeModel();
+
+                var rp_fornecedor = new FornecedorRepository();
+                var rp_pagar = new PagarRepository();
+
+                cidade.Nome = txtCidade.Text;
+                cidade.Uf = txtEstado.Text;
+
+                endereco.Bairro = txtBairro.Text;
+                endereco.Complemento = txtComplemento.Text;
+                endereco.Logradouro = txtLogradouro.Text;
+                endereco.Cep = mskCep.Text.Replace("-", "");
+                endereco.Numero = txtNumero.Text;
+                endereco.Cidade = cidade;
+
+                fornecedor.Nome = txtNomeRazao.Text;
+                fornecedor.CnpjCpf = mskCpfCnpj.Text.Replace(".", "").Replace("-", "").Replace("/", "");
+                fornecedor.Endereco = endereco;
+
+                rp_fornecedor.Add(fornecedor);
+                rp_fornecedor.Save();
+
+                MessageBox.Show("Dados salvos", "Mensagem de Validação", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+                btnLimpar_Click(sender, e);
+            }
+                       
+        }
+        #endregion
+
+        #region Impedir o usuário de dar espaço
+        private void mskCpfCnpj_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                return;
+            }
         }
 
+        private void mskCep_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                return;
+            }
+        }
+
+        private void mskValorDoc_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                return;
+            }
+        }
+        #endregion
 
         #region Altera a Mascara do Valor do Titulo
         //converte para o formato monerário com o R$
@@ -329,5 +436,7 @@ namespace TccAliare.Forms
         }
 
         #endregion
+
+        
     }
 }

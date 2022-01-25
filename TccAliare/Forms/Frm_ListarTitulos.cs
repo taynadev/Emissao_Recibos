@@ -41,21 +41,27 @@ namespace TccAliare.Forms
 
         private void btnRecibo_Click(object sender, EventArgs e)
         {           
-            var id = dgvTitulos.Rows[dgvTitulos.CurrentCell.RowIndex].Cells["ID"].Value;
-            //Imprimir recibo = new Imprimir();
-            FastReport_Imprime recibo = new FastReport_Imprime();
+            
             if (rbRecebedor.Checked)
             {
+                var id = dgvTitulos.Rows[dgvTitulos.CurrentCell.RowIndex].Cells["ID"].Value;
+                //Imprimir recibo = new Imprimir();
+                FastReport_Imprime recibo = new FastReport_Imprime();
                 recibo.DadosRecibo(((int)id));
             }
             else if (rbPagador.Checked)
             {
+                var id = dgvTitulos.Rows[dgvTitulos.CurrentCell.RowIndex].Cells["ID"].Value;
+                //Imprimir recibo = new Imprimir();
+                FastReport_Imprime recibo = new FastReport_Imprime();
                 recibo.DadosRecibo(((int)id));
             }
             else
             {
                 MessageBox.Show("Selecione o tipo de titulo que deseja buscar (Pagamento ou Recebimento)",
                                 "Mensagem de validação", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                errorProvider.SetError(rbPagador, "Escolha o campo");
+                errorProvider.SetError(rbRecebedor, "Escolha o campo");
             }
         }
 
@@ -69,7 +75,14 @@ namespace TccAliare.Forms
                 .GetByNome(txtConsultaTitulo.Text);
 
                 dgvTitulos.DataSource = recebimentos;
-                dgvTitulos.Columns[0].Visible = false;
+                if (dgvTitulos.Rows.Count > 0)
+                {
+                    dgvTitulos.Columns[0].Visible = false;
+                }
+                else
+                {
+                    MessageBox.Show("Dados não encontrados, insira novamente os dados", "Mensagem de validação", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else if (rbPagador.Checked)
             {
@@ -78,7 +91,14 @@ namespace TccAliare.Forms
                 .GetByNome(txtConsultaTitulo.Text);               
 
                 dgvTitulos.DataSource = pagamentos;
-                dgvTitulos.Columns[0].Visible = false;
+                if (dgvTitulos.Rows.Count > 0)
+                {
+                    dgvTitulos.Columns[0].Visible = false;
+                }
+                else
+                {
+                    MessageBox.Show("Dados não encontrados, insira novamente os dados", "Mensagem de validação", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             else
             {

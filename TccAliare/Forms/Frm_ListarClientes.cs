@@ -60,16 +60,26 @@ namespace TccAliare.Forms
             ClienteRepository clirep = new ClienteRepository();
             var cliente = clirep.GetByNome(txtNome.Text);
             dgvClientes.DataSource = cliente;
+            
             dgvClientes.Columns["CpfCnpj"].HeaderText = "CPF/CNPJ";
             dgvClientes.Columns["Nome"].HeaderText = "Nome / Razão Social";
             dgvClientes.Columns["NomeCidade"].HeaderText = "Cidade";
 
+            if(dgvClientes.Rows.Count > 0)
+            {
+                dgvClientes.Columns[0].Visible = false;
+                dgvClientes.Columns[8].Visible = false;
+
+                dgvClientes.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            }
+            else
+            {
+                MessageBox.Show("Dados não encontrados, insira novamente os dados", "Mensagem de validação", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
 
-            dgvClientes.Columns[0].Visible = false;
-            dgvClientes.Columns[8].Visible = false;
 
-            dgvClientes.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            
         }
 
 

@@ -46,11 +46,18 @@ namespace TccAliare.Forms
             dgvFornecedores.Columns["CnpjCpf"].HeaderText = "CNPJ/CPF";
             dgvFornecedores.Columns["NomeCidade"].HeaderText = "Cidade";
 
-            dgvFornecedores.Columns[0].Visible = false;
-            dgvFornecedores.Columns[8].Visible = false;
+            if (dgvFornecedores.Rows.Count > 0)
+            {
+                dgvFornecedores.Columns[0].Visible = false;
+                dgvFornecedores.Columns[8].Visible = false;
 
-            dgvFornecedores.AutoResizeColumns(
-            DataGridViewAutoSizeColumnsMode.AllCells);
+                dgvFornecedores.AutoResizeColumns(
+                DataGridViewAutoSizeColumnsMode.AllCells);
+            }
+            else
+            {
+                MessageBox.Show("Dados não encontrados, insira novamente os dados", "Mensagem de validação", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void txtNome_TextChanged (object sender, EventArgs e)
