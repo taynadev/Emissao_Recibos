@@ -11,7 +11,6 @@ namespace TccAliare.Impressao
 {
     public class FastReport_Imprime
     {
-
         private string nomeRecebedor;
         private string cpfCnpjRecebedor;
         private string Logradouro;
@@ -35,15 +34,17 @@ namespace TccAliare.Impressao
             valor = receber.Valor;
             descricao = receber.Observacao;
 
-            nomePagador = receber.Cliente.Nome;
-            CpfCnpjPagador = receber.Cliente.CpfCnpj;
+            int contagem = receber.Cliente.CpfCnpj.Length;
 
+            nomePagador = receber.Cliente.Nome;
+            if(contagem > 11) { CpfCnpjPagador = FormatCNPJ(receber.Cliente.CpfCnpj); }
+            else { CpfCnpjPagador = FormatCPF(receber.Cliente.CpfCnpj); }
+            
             nomeRecebedor = receber.Empresa.RazaoSocial;
 
-            if (receber.Empresa.Cnpj != null)
-                cpfCnpjRecebedor = receber.Empresa.Cnpj;
-            else
-                cpfCnpjRecebedor = receber.Empresa.Cpf;
+            if (receber.Empresa.Cnpj != null) { cpfCnpjRecebedor = FormatCNPJ(receber.Empresa.Cnpj); }
+            else { cpfCnpjRecebedor = FormatCPF(receber.Empresa.Cpf); }
+                
 
             Logradouro = receber.Empresa.Logradouro;
             Numero = receber.Empresa.Numero;
@@ -65,7 +66,8 @@ namespace TccAliare.Impressao
             descricao = pagamento.Observacao;
 
             nomeRecebedor = pagamento.Fornecedor.Nome;
-            cpfCnpjRecebedor = pagamento.Fornecedor.CnpjCpf;
+
+            cpfCnpjRecebedor = FormatCPF(pagamento.Fornecedor.CnpjCpf);
 
             Logradouro = pagamento.Fornecedor.Endereco.Logradouro;
             Numero = pagamento.Fornecedor.Endereco.Numero;
@@ -78,9 +80,9 @@ namespace TccAliare.Impressao
 
             nomePagador = pagamento.Empresa.RazaoSocial;
             if (pagamento.Empresa.Cnpj != null)
-                CpfCnpjPagador = pagamento.Empresa.Cnpj;
+                CpfCnpjPagador = FormatCNPJ(pagamento.Empresa.Cnpj);
             else
-                CpfCnpjPagador = pagamento.Empresa.Cpf;
+                CpfCnpjPagador = FormatCPF(pagamento.Empresa.Cpf);
 
             cidadeEmpresa = pagamento.Empresa.Cidade.Nome;
             UFEmpresa = pagamento.Empresa.Cidade.Uf;
@@ -106,13 +108,17 @@ namespace TccAliare.Impressao
                     $" ({valorExtenso})" +
                     (string.IsNullOrEmpty(descricao) ? "." : ", em virtude de " + descricao + "."),
                 DataCompleta = cidadeEmpresa + " - " + UFEmpresa + ", " + DateTime.Now.ToString("dd/MM/yyyy"),
-                ValorExtenso = valorExtenso
+                ValorExtenso = valorExtenso,
+                RazaoSocial_pagador = nomePagador,
+                RazaoSocial_recebedor = nomeRecebedor,
+                Cgc_pagador = CpfCnpjPagador,
+                Cgc_recebedor = cpfCnpjRecebedor
             };
             using (Report report = new Report())
             {
                 report.Load("Untitled.frx");
                 report.RegisterData(new[] { textoformatado }, "cliente");
-                report.Design();
+                report.Show();
             }
         }
         public class TextoFormatado
@@ -120,7 +126,20 @@ namespace TccAliare.Impressao
             public string Texto_formatado { get; set; }
             public string DataCompleta { get; set; }
             public string ValorExtenso { get; set; }
+            public string RazaoSocial_pagador { get; set; }
+            public string  RazaoSocial_recebedor { get; set; }
+            public string Cgc_recebedor { get; set; }
+            public string Cgc_pagador { get; set; }
         }
 
+        public string FormatCNPJ(string CNPJ)
+        {
+            return Convert.ToUInt64(CNPJ).ToString(@"00\.000\.000\/0000\-00");
+        }
+
+        public string FormatCPF(string CPF)
+        {
+            return Convert.ToUInt64(CPF).ToString(@"000\.000\.000\-00");
+        }
     }
 }
