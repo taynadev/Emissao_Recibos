@@ -60,6 +60,8 @@ namespace TccAliare.Impressao
         }
         public void DadosPagamento(int id)
         {
+            
+            
             PagarRepository pagarRepository = new PagarRepository();
             var pagamento = pagarRepository.GetByIdPagamento(id);
             valor = pagamento.Valor;
@@ -67,7 +69,13 @@ namespace TccAliare.Impressao
 
             nomeRecebedor = pagamento.Fornecedor.Nome;
 
+            int contagem = pagamento.Fornecedor.CnpjCpf.Length;
+
             cpfCnpjRecebedor = FormatCPF(pagamento.Fornecedor.CnpjCpf);
+            if (contagem > 11)
+            { cpfCnpjRecebedor = FormatCNPJ(pagamento.Fornecedor.CnpjCpf); }
+            else
+            { cpfCnpjRecebedor = FormatCPF(pagamento.Fornecedor.CnpjCpf); }
 
             Logradouro = pagamento.Fornecedor.Endereco.Logradouro;
             Numero = pagamento.Fornecedor.Endereco.Numero;
@@ -84,10 +92,11 @@ namespace TccAliare.Impressao
             else
                 CpfCnpjPagador = FormatCPF(pagamento.Empresa.Cpf);
 
-            cidadeEmpresa = pagamento.Empresa.Cidade.Nome;
-            UFEmpresa = pagamento.Empresa.Cidade.Uf;
+            cidadeEmpresa = pagamento.Fornecedor.Endereco.Cidade.Nome;
+            UFEmpresa = pagamento.Fornecedor.Endereco.Cidade.Uf;
 
             Imprimir();
+            
         }
         public void Imprimir()
         {

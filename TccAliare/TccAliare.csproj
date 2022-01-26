@@ -37,15 +37,18 @@
   <ItemGroup>
     <Reference Include="FastReport, Version=2022.1.9.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Downloads\FastReport.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\FASTREPORT\FastReport.dll</HintPath>
     </Reference>
     <Reference Include="FastReport.Bars, Version=2022.1.9.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Downloads\FastReport.Bars.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\FASTREPORT\FastReport.Bars.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Compat, Version=2021.3.0.0, Culture=neutral, PublicKeyToken=406e1f4c3c8ef97e, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastReport.Compat.2021.3.0\lib\net40\FastReport.Compat.dll</HintPath>
     </Reference>
     <Reference Include="FastReport.Editor, Version=2022.1.9.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Downloads\FastReport.Editor.dll</HintPath>
+      <HintPath>..\..\..\..\..\Downloads\FASTREPORT\FastReport.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -208,6 +211,12 @@
     <Compile Include="Forms\Frm_EditarTitulo.Designer.cs">
       <DependentUpon>Frm_EditarTitulo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Frm_EditarTituloPagar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Frm_EditarTituloPagar.Designer.cs">
+      <DependentUpon>Frm_EditarTituloPagar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Frm_ListarClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -254,6 +263,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Frm_EditarTitulo.resx">
       <DependentUpon>Frm_EditarTitulo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Frm_EditarTituloPagar.resx">
+      <DependentUpon>Frm_EditarTituloPagar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Frm_ListarClientes.resx">
       <DependentUpon>Frm_ListarClientes.cs</DependentUpon>

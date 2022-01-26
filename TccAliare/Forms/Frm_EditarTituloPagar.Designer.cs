@@ -1,6 +1,6 @@
 ﻿namespace TccAliare.Forms
 {
-    partial class Frm_EditarTitulo
+    partial class Frm_EditarTituloPagar
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,17 @@
         private void InitializeComponent ()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_EditarTitulo));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_EditarTituloPagar));
+            this.lblTitulo = new System.Windows.Forms.Label();
+            this.mskCpfCnpj = new System.Windows.Forms.MaskedTextBox();
+            this.mskValorDoc = new System.Windows.Forms.MaskedTextBox();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.txtStatus = new System.Windows.Forms.TextBox();
+            this.lblNumDoc = new System.Windows.Forms.Label();
+            this.txtNumDoc = new System.Windows.Forms.TextBox();
+            this.lblObs = new System.Windows.Forms.Label();
+            this.lblValor = new System.Windows.Forms.Label();
+            this.txtObs = new System.Windows.Forms.TextBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnAtualizar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
@@ -39,19 +49,106 @@
             this.lblNome = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
             this.txtNome = new System.Windows.Forms.TextBox();
-            this.txtObs = new System.Windows.Forms.TextBox();
-            this.lblValor = new System.Windows.Forms.Label();
-            this.lblObs = new System.Windows.Forms.Label();
-            this.txtNumDoc = new System.Windows.Forms.TextBox();
-            this.lblNumDoc = new System.Windows.Forms.Label();
-            this.txtStatus = new System.Windows.Forms.TextBox();
-            this.lblStatus = new System.Windows.Forms.Label();
-            this.mskValorDoc = new System.Windows.Forms.MaskedTextBox();
-            this.mskCpfCnpj = new System.Windows.Forms.MaskedTextBox();
-            this.lblTitulo = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
+            // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitulo.Location = new System.Drawing.Point(354, 14);
+            this.lblTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(177, 29);
+            this.lblTitulo.TabIndex = 105;
+            this.lblTitulo.Text = "Titulo a Pagar";
+            // 
+            // mskCpfCnpj
+            // 
+            this.mskCpfCnpj.Enabled = false;
+            this.mskCpfCnpj.Location = new System.Drawing.Point(243, 142);
+            this.mskCpfCnpj.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.mskCpfCnpj.Name = "mskCpfCnpj";
+            this.mskCpfCnpj.Size = new System.Drawing.Size(274, 26);
+            this.mskCpfCnpj.TabIndex = 104;
+            // 
+            // mskValorDoc
+            // 
+            this.mskValorDoc.Location = new System.Drawing.Point(123, 305);
+            this.mskValorDoc.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.mskValorDoc.Name = "mskValorDoc";
+            this.mskValorDoc.Size = new System.Drawing.Size(148, 26);
+            this.mskValorDoc.TabIndex = 103;
+            this.mskValorDoc.Enter += new System.EventHandler(this.mskValorDoc_Enter);
+            this.mskValorDoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mskValorDoc_KeyPress);
+            this.mskValorDoc.Leave += new System.EventHandler(this.mskValorDoc_Leave);
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.Location = new System.Drawing.Point(128, 420);
+            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(74, 25);
+            this.lblStatus.TabIndex = 102;
+            this.lblStatus.Text = "Status";
+            // 
+            // txtStatus
+            // 
+            this.txtStatus.Location = new System.Drawing.Point(123, 449);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(160, 26);
+            this.txtStatus.TabIndex = 101;
+            // 
+            // lblNumDoc
+            // 
+            this.lblNumDoc.AutoSize = true;
+            this.lblNumDoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNumDoc.Location = new System.Drawing.Point(122, 345);
+            this.lblNumDoc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNumDoc.Name = "lblNumDoc";
+            this.lblNumDoc.Size = new System.Drawing.Size(151, 25);
+            this.lblNumDoc.TabIndex = 100;
+            this.lblNumDoc.Text = "N° Documento";
+            // 
+            // txtNumDoc
+            // 
+            this.txtNumDoc.Location = new System.Drawing.Point(123, 374);
+            this.txtNumDoc.Name = "txtNumDoc";
+            this.txtNumDoc.Size = new System.Drawing.Size(160, 26);
+            this.txtNumDoc.TabIndex = 99;
+            // 
+            // lblObs
+            // 
+            this.lblObs.AutoSize = true;
+            this.lblObs.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblObs.Location = new System.Drawing.Point(333, 274);
+            this.lblObs.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblObs.Name = "lblObs";
+            this.lblObs.Size = new System.Drawing.Size(129, 25);
+            this.lblObs.TabIndex = 98;
+            this.lblObs.Text = "Observação";
+            // 
+            // lblValor
+            // 
+            this.lblValor.AutoSize = true;
+            this.lblValor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblValor.Location = new System.Drawing.Point(128, 274);
+            this.lblValor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblValor.Name = "lblValor";
+            this.lblValor.Size = new System.Drawing.Size(63, 25);
+            this.lblValor.TabIndex = 97;
+            this.lblValor.Text = "Valor";
+            // 
+            // txtObs
+            // 
+            this.txtObs.Location = new System.Drawing.Point(327, 303);
+            this.txtObs.Multiline = true;
+            this.txtObs.Name = "txtObs";
+            this.txtObs.Size = new System.Drawing.Size(458, 173);
+            this.txtObs.TabIndex = 96;
             // 
             // btnClose
             // 
@@ -63,7 +160,7 @@
             this.btnClose.Location = new System.Drawing.Point(848, 8);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(33, 34);
-            this.btnClose.TabIndex = 75;
+            this.btnClose.TabIndex = 95;
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
@@ -76,11 +173,11 @@
             this.btnAtualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAtualizar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAtualizar.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnAtualizar.Location = new System.Drawing.Point(288, 523);
+            this.btnAtualizar.Location = new System.Drawing.Point(290, 522);
             this.btnAtualizar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnAtualizar.Name = "btnAtualizar";
             this.btnAtualizar.Size = new System.Drawing.Size(153, 51);
-            this.btnAtualizar.TabIndex = 74;
+            this.btnAtualizar.TabIndex = 94;
             this.btnAtualizar.Text = "Atualizar";
             this.btnAtualizar.UseVisualStyleBackColor = false;
             this.btnAtualizar.Click += new System.EventHandler(this.btnAtualizar_Click);
@@ -94,11 +191,11 @@
             this.btnExcluir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExcluir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExcluir.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnExcluir.Location = new System.Drawing.Point(470, 523);
+            this.btnExcluir.Location = new System.Drawing.Point(471, 522);
             this.btnExcluir.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(153, 51);
-            this.btnExcluir.TabIndex = 73;
+            this.btnExcluir.TabIndex = 93;
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.UseVisualStyleBackColor = false;
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
@@ -112,11 +209,11 @@
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelar.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnCancelar.Location = new System.Drawing.Point(651, 523);
+            this.btnCancelar.Location = new System.Drawing.Point(652, 522);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(153, 51);
-            this.btnCancelar.TabIndex = 72;
+            this.btnCancelar.TabIndex = 92;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -125,155 +222,56 @@
             // 
             this.lblCpfCnpj.AutoSize = true;
             this.lblCpfCnpj.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCpfCnpj.Location = new System.Drawing.Point(237, 115);
+            this.lblCpfCnpj.Location = new System.Drawing.Point(238, 114);
             this.lblCpfCnpj.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCpfCnpj.Name = "lblCpfCnpj";
             this.lblCpfCnpj.Size = new System.Drawing.Size(131, 25);
-            this.lblCpfCnpj.TabIndex = 60;
+            this.lblCpfCnpj.TabIndex = 91;
             this.lblCpfCnpj.Text = "CPF / CNPJ";
             // 
             // lblID
             // 
             this.lblID.AutoSize = true;
             this.lblID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblID.Location = new System.Drawing.Point(126, 115);
+            this.lblID.Location = new System.Drawing.Point(128, 114);
             this.lblID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblID.Name = "lblID";
             this.lblID.Size = new System.Drawing.Size(33, 25);
-            this.lblID.TabIndex = 59;
+            this.lblID.TabIndex = 90;
             this.lblID.Text = "ID";
             // 
             // lblNome
             // 
             this.lblNome.AutoSize = true;
             this.lblNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNome.Location = new System.Drawing.Point(126, 198);
+            this.lblNome.Location = new System.Drawing.Point(128, 197);
             this.lblNome.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNome.Name = "lblNome";
             this.lblNome.Size = new System.Drawing.Size(214, 25);
-            this.lblNome.TabIndex = 58;
+            this.lblNome.TabIndex = 89;
             this.lblNome.Text = "Nome / Razão Social";
             // 
             // txtID
             // 
             this.txtID.Enabled = false;
-            this.txtID.Location = new System.Drawing.Point(122, 143);
+            this.txtID.Location = new System.Drawing.Point(123, 142);
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(78, 26);
-            this.txtID.TabIndex = 55;
+            this.txtID.TabIndex = 88;
             // 
             // txtNome
             // 
             this.txtNome.Enabled = false;
-            this.txtNome.Location = new System.Drawing.Point(122, 228);
+            this.txtNome.Location = new System.Drawing.Point(123, 226);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(662, 26);
-            this.txtNome.TabIndex = 52;
-            // 
-            // txtObs
-            // 
-            this.txtObs.Location = new System.Drawing.Point(326, 305);
-            this.txtObs.Multiline = true;
-            this.txtObs.Name = "txtObs";
-            this.txtObs.Size = new System.Drawing.Size(458, 173);
-            this.txtObs.TabIndex = 77;
-            // 
-            // lblValor
-            // 
-            this.lblValor.AutoSize = true;
-            this.lblValor.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValor.Location = new System.Drawing.Point(126, 275);
-            this.lblValor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblValor.Name = "lblValor";
-            this.lblValor.Size = new System.Drawing.Size(63, 25);
-            this.lblValor.TabIndex = 78;
-            this.lblValor.Text = "Valor";
-            // 
-            // lblObs
-            // 
-            this.lblObs.AutoSize = true;
-            this.lblObs.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblObs.Location = new System.Drawing.Point(332, 275);
-            this.lblObs.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblObs.Name = "lblObs";
-            this.lblObs.Size = new System.Drawing.Size(129, 25);
-            this.lblObs.TabIndex = 79;
-            this.lblObs.Text = "Observação";
-            // 
-            // txtNumDoc
-            // 
-            this.txtNumDoc.Location = new System.Drawing.Point(122, 375);
-            this.txtNumDoc.Name = "txtNumDoc";
-            this.txtNumDoc.Size = new System.Drawing.Size(160, 26);
-            this.txtNumDoc.TabIndex = 80;
-            // 
-            // lblNumDoc
-            // 
-            this.lblNumDoc.AutoSize = true;
-            this.lblNumDoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumDoc.Location = new System.Drawing.Point(118, 346);
-            this.lblNumDoc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblNumDoc.Name = "lblNumDoc";
-            this.lblNumDoc.Size = new System.Drawing.Size(151, 25);
-            this.lblNumDoc.TabIndex = 81;
-            this.lblNumDoc.Text = "N° Documento";
-            // 
-            // txtStatus
-            // 
-            this.txtStatus.Location = new System.Drawing.Point(122, 451);
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(160, 26);
-            this.txtStatus.TabIndex = 82;
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatus.Location = new System.Drawing.Point(126, 422);
-            this.lblStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(74, 25);
-            this.lblStatus.TabIndex = 83;
-            this.lblStatus.Text = "Status";
-            // 
-            // mskValorDoc
-            // 
-            this.mskValorDoc.Location = new System.Drawing.Point(122, 306);
-            this.mskValorDoc.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.mskValorDoc.Name = "mskValorDoc";
-            this.mskValorDoc.Size = new System.Drawing.Size(148, 26);
-            this.mskValorDoc.TabIndex = 84;
-            this.mskValorDoc.Enter += new System.EventHandler(this.mskValorDoc_Enter);
-            this.mskValorDoc.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mskValorDoc_KeyDown);
-            this.mskValorDoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mskValorDoc_KeyPress);
-            this.mskValorDoc.Leave += new System.EventHandler(this.mskValorDoc_Leave);
-            // 
-            // mskCpfCnpj
-            // 
-            this.mskCpfCnpj.Enabled = false;
-            this.mskCpfCnpj.Location = new System.Drawing.Point(242, 143);
-            this.mskCpfCnpj.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.mskCpfCnpj.Name = "mskCpfCnpj";
-            this.mskCpfCnpj.Size = new System.Drawing.Size(274, 26);
-            this.mskCpfCnpj.TabIndex = 85;
-            this.mskCpfCnpj.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mskCpfCnpj_KeyDown);
-            // 
-            // lblTitulo
-            // 
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.Location = new System.Drawing.Point(320, 28);
-            this.lblTitulo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(208, 29);
-            this.lblTitulo.TabIndex = 86;
-            this.lblTitulo.Text = "Titulo a Receber";
+            this.txtNome.TabIndex = 87;
             // 
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // Frm_EditarTitulo
+            // Frm_EditarTituloPagar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -299,10 +297,11 @@
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.txtNome);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Frm_EditarTitulo";
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Name = "Frm_EditarTituloPagar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Frm_EditarTitulo";
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Frm_EditarTitulo_MouseDown);
+            this.Text = "Frm_EditarTituloPagar";
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Frm_EditarTituloPagar_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -311,6 +310,15 @@
 
         #endregion
 
+        private System.Windows.Forms.Label lblTitulo;
+        public System.Windows.Forms.MaskedTextBox mskValorDoc;
+        private System.Windows.Forms.Label lblStatus;
+        public System.Windows.Forms.TextBox txtStatus;
+        private System.Windows.Forms.Label lblNumDoc;
+        public System.Windows.Forms.TextBox txtNumDoc;
+        private System.Windows.Forms.Label lblObs;
+        private System.Windows.Forms.Label lblValor;
+        public System.Windows.Forms.TextBox txtObs;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnAtualizar;
         private System.Windows.Forms.Button btnExcluir;
@@ -318,17 +326,8 @@
         private System.Windows.Forms.Label lblCpfCnpj;
         private System.Windows.Forms.Label lblID;
         private System.Windows.Forms.Label lblNome;
-        private System.Windows.Forms.Label lblValor;
-        private System.Windows.Forms.Label lblObs;
-        private System.Windows.Forms.Label lblNumDoc;
-        private System.Windows.Forms.Label lblStatus;
         public System.Windows.Forms.TextBox txtID;
         public System.Windows.Forms.TextBox txtNome;
-        public System.Windows.Forms.TextBox txtObs;
-        public System.Windows.Forms.TextBox txtNumDoc;
-        public System.Windows.Forms.TextBox txtStatus;
-        public System.Windows.Forms.MaskedTextBox mskValorDoc;
-        private System.Windows.Forms.Label lblTitulo;
         public System.Windows.Forms.MaskedTextBox mskCpfCnpj;
         private System.Windows.Forms.ErrorProvider errorProvider;
     }

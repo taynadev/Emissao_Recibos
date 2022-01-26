@@ -23,17 +23,27 @@ namespace TccAliare.Forms
         private void btnEditar_Click (object sender, EventArgs e)
         {
             Frm_EditarFornecedor editarFornecedor = new Frm_EditarFornecedor();
-            editarFornecedor.txtID.Text = dgvFornecedores.CurrentRow.Cells["Id"].Value.ToString();
-            editarFornecedor.txtCnpjCpf.Text = dgvFornecedores.CurrentRow.Cells["CnpjCpf"].Value.ToString();
-            editarFornecedor.txtCep.Text = dgvFornecedores.CurrentRow.Cells["Cep"].Value.ToString();
-            editarFornecedor.txtNome.Text = dgvFornecedores.CurrentRow.Cells["Nome"].Value.ToString();
-            editarFornecedor.txtLogradouro.Text = dgvFornecedores.CurrentRow.Cells["Logradouro"].Value.ToString();
-            editarFornecedor.txtBairro.Text = dgvFornecedores.CurrentRow.Cells["Bairro"].Value.ToString();
-            editarFornecedor.txtComplemento.Text = dgvFornecedores.CurrentRow.Cells["Complemento"].Value.ToString();
-            editarFornecedor.txtNumero.Text = dgvFornecedores.CurrentRow.Cells["Numero"].Value.ToString();
-            editarFornecedor.txtCidade.Text = dgvFornecedores.CurrentRow.Cells["NomeCidade"].Value.ToString();
-            editarFornecedor.txtUF.Text = dgvFornecedores.CurrentRow.Cells["Uf"].Value.ToString();
-            editarFornecedor.ShowDialog();
+
+            if (dgvFornecedores.SelectedRows.Count > 0)
+            {
+                
+                editarFornecedor.txtID.Text = dgvFornecedores.CurrentRow.Cells["Id"].Value.ToString();
+                editarFornecedor.txtCnpjCpf.Text = dgvFornecedores.CurrentRow.Cells["CnpjCpf"].Value.ToString();
+                editarFornecedor.txtCep.Text = dgvFornecedores.CurrentRow.Cells["Cep"].Value.ToString();
+                editarFornecedor.txtNome.Text = dgvFornecedores.CurrentRow.Cells["Nome"].Value.ToString();
+                editarFornecedor.txtLogradouro.Text = dgvFornecedores.CurrentRow.Cells["Logradouro"].Value.ToString();
+                editarFornecedor.txtBairro.Text = dgvFornecedores.CurrentRow.Cells["Bairro"].Value.ToString();
+                editarFornecedor.txtComplemento.Text = dgvFornecedores.CurrentRow.Cells["Complemento"].Value.ToString();
+                editarFornecedor.txtNumero.Text = dgvFornecedores.CurrentRow.Cells["Numero"].Value.ToString();
+                editarFornecedor.txtCidade.Text = dgvFornecedores.CurrentRow.Cells["NomeCidade"].Value.ToString();
+                editarFornecedor.txtUF.Text = dgvFornecedores.CurrentRow.Cells["Uf"].Value.ToString();
+                editarFornecedor.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Selecione uma linha!");
+            }
+            
         }
 
         private void btnBuscar_Click (object sender, EventArgs e)

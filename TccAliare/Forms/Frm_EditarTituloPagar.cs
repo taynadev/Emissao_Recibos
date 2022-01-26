@@ -11,11 +11,8 @@ using System.Windows.Forms;
 
 namespace TccAliare.Forms
 {
-    
-
-    public partial class Frm_EditarTitulo : Form
+    public partial class Frm_EditarTituloPagar : Form
     {
-
         #region funcoes para habilitar o arraste da janela
         //Codigo para habilitar o arraste da janela
         public const int WM_NCLBUTTONDOWN = 0xA1;
@@ -26,26 +23,12 @@ namespace TccAliare.Forms
         public static extern bool ReleaseCapture ();
         #endregion
 
-        public Frm_EditarTitulo ()
+
+        public Frm_EditarTituloPagar ()
         {
             InitializeComponent();
         }
 
-        private void Frm_EditarTitulo_MouseDown (object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-
-        private void btnClose_Click (object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        #region Altera Mascara valor do documento
         private void mskValorDoc_Leave (object sender, EventArgs e)
         {
             if (mskValorDoc.Text.Replace("R$", "").Replace(",", "") != "")
@@ -55,15 +38,14 @@ namespace TccAliare.Forms
             else
             {
                 MessageBox.Show("Há campos obrigatorios a serem preenchidos", "Mensagem de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                errorProvider.SetError(mskValorDoc, "Preencha o campo");
             }
         }
 
         private void mskValorDoc_KeyPress (object sender, KeyPressEventArgs e)
         {
             if ((e.KeyChar < '0' || e.KeyChar > '9') &&
-               (e.KeyChar != ',' && e.KeyChar != '.' &&
-                e.KeyChar != (Char) 13 && e.KeyChar != (Char) 8))
+             (e.KeyChar != ',' && e.KeyChar != '.' &&
+              e.KeyChar != (Char) 13 && e.KeyChar != (Char) 8))
             {
                 e.KeyChar = (Char) 0;
             }
@@ -99,7 +81,19 @@ namespace TccAliare.Forms
             mskValorDoc.SelectAll();
         }
 
-        #endregion
+        private void Frm_EditarTituloPagar_MouseDown (object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void btnClose_Click (object sender, EventArgs e)
+        {
+            Close();
+        }
 
         private void btnCancelar_Click (object sender, EventArgs e)
         {
@@ -127,18 +121,16 @@ namespace TccAliare.Forms
                 MessageBox.Show("Há campos obrigatorios a serem preenchidos", "Mensagem de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 errorProvider.SetError(mskValorDoc, "Preencha o campo");
             }
-
-          
             
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            RecebedorRepository receber = new RecebedorRepository();
-            var r = receber.GetById(int.Parse(txtID.Text));
+            PagarRepository pagamento = new PagarRepository();
+            var p = pagamento.GetById(int.Parse(txtID.Text));
 
-            receber.Remove(r);
-            receber.Save();
+            pagamento.Remove(p);
+            pagamento.Save();
 
             MessageBox.Show("Excluído com sucesso!", "Mensagem de validação", MessageBoxButtons.OK, MessageBoxIcon.None);
 
@@ -153,26 +145,6 @@ namespace TccAliare.Forms
             btnAtualizar.Enabled = false;
             btnCancelar.Enabled = false;
             btnExcluir.Enabled = false;
-        }
-
-        private void mskCpfCnpj_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Space)
-            {
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-                return;
-            }
-        }
-
-        private void mskValorDoc_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Space)
-            {
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-                return;
-            }
         }
     }
 }

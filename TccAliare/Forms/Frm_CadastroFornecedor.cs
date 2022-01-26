@@ -146,6 +146,9 @@ namespace TccAliare.Forms
             mskValorDoc.Enabled = false;
             txtNumDoc.Enabled = false;
             txtObs.Enabled = false;
+            txtObs.Text = "";
+            txtNumDoc.Text = "";
+            mskValorDoc.Text = "";
         }
 
         private void btnNovoCadastro_Click (object sender, EventArgs e)
@@ -388,7 +391,15 @@ namespace TccAliare.Forms
         //converte para o formato monerário com o R$
         private void mskValorDoc_Leave (object sender, EventArgs e)
         {
-            mskValorDoc.Text = Convert.ToDouble(mskValorDoc.Text).ToString("C");
+            if(mskValorDoc.Text != "")
+            {
+                mskValorDoc.Text = Convert.ToDouble(mskValorDoc.Text).ToString("C");
+            }
+            else
+            {
+                MessageBox.Show("Há campos obrigatorios a serem preenchidos", "Mensagem de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         //evita que letras sejam digitadas, faz com que o ponto seja substituido por virgula e que exista apenas uma virgula na string
@@ -435,8 +446,17 @@ namespace TccAliare.Forms
             }
         }
 
+
         #endregion
 
-        
+        private void btnCadastrar_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+        }
+
+        private void Frm_CadastroFornecedor_KeyDown(object sender, KeyEventArgs e)
+        {
+           
+        }
     }
 }

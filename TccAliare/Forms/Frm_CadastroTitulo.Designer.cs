@@ -378,6 +378,7 @@
             this.txtEstado.Enabled = false;
             this.txtEstado.Location = new System.Drawing.Point(1089, 334);
             this.txtEstado.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtEstado.MaxLength = 2;
             this.txtEstado.Name = "txtEstado";
             this.txtEstado.Size = new System.Drawing.Size(108, 26);
             this.txtEstado.TabIndex = 150;

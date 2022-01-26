@@ -41,6 +41,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\DIVERSOS\OneDrive\OneDrive - SIAGRI SISTEMAS DE GESTAO LTDA\Área de Trabalho\PROJETOS\FASTREPORT\FastReport.Bars.dll</HintPath>
     </Reference>
+    <Reference Include="FastReport.Compat, Version=2021.3.0.0, Culture=neutral, PublicKeyToken=406e1f4c3c8ef97e, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastReport.Compat.2021.3.0\lib\net40\FastReport.Compat.dll</HintPath>
+    </Reference>
     <Reference Include="FastReport.Editor, Version=2022.1.9.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\DIVERSOS\OneDrive\OneDrive - SIAGRI SISTEMAS DE GESTAO LTDA\Área de Trabalho\PROJETOS\FASTREPORT\FastReport.Editor.dll</HintPath>

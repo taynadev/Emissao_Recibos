@@ -21,40 +21,79 @@ namespace TccAliare.Forms
 
         private void btnEditar_Click (object sender, EventArgs e)
         {
-            //Abre a tela de editar com todos os dados da linha selecionada
-            Frm_EditarTitulo editarTitulo = new Frm_EditarTitulo ();
-            if (dgvTitulos.SelectedRows.Count > 0)
+            if (rbPagador.Checked)
             {
-                editarTitulo.txtID.Text = dgvTitulos.CurrentRow.Cells["Id"].Value.ToString();
-                editarTitulo.txtNome.Text = dgvTitulos.CurrentRow.Cells["Nome"].Value.ToString();
-                editarTitulo.mskValor.Text = dgvTitulos.CurrentRow.Cells["Valor"].Value.ToString();
-                editarTitulo.txtNumDoc.Text = dgvTitulos.CurrentRow.Cells["Numero"].Value.ToString();
-                editarTitulo.txtStatus.Text = dgvTitulos.CurrentRow.Cells["Status"].Value.ToString();
-                editarTitulo.txtObs.Text = dgvTitulos.CurrentRow.Cells["Observação"].Value.ToString();
-                editarTitulo.ShowDialog();
+                Frm_EditarTituloPagar editarTituloPagar = new Frm_EditarTituloPagar();
+                if (dgvTitulos.SelectedRows.Count > 0)
+                {
+                    editarTituloPagar.txtID.Text = dgvTitulos.CurrentRow.Cells["Id"].Value.ToString();
+                    editarTituloPagar.mskCpfCnpj.Text = dgvTitulos.CurrentRow.Cells["CPF"].Value.ToString();
+                    editarTituloPagar.txtNome.Text = dgvTitulos.CurrentRow.Cells["Fornecedor"].Value.ToString();
+                    editarTituloPagar.mskValorDoc.Text = dgvTitulos.CurrentRow.Cells["Valor"].Value.ToString();
+                    editarTituloPagar.txtNumDoc.Text = dgvTitulos.CurrentRow.Cells["Numero"].Value.ToString();
+                    editarTituloPagar.txtStatus.Text = dgvTitulos.CurrentRow.Cells["Status"].Value.ToString();
+                    editarTituloPagar.txtObs.Text = dgvTitulos.CurrentRow.Cells["Observacao"].Value.ToString();
+                    editarTituloPagar.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Selecione uma linha!");
+                }
             }
-            else
+            else if (rbRecebedor.Checked)
             {
-                MessageBox.Show("Selecione uma linha!");
+                Frm_EditarTitulo editarTitulo = new Frm_EditarTitulo();
+                if (dgvTitulos.SelectedRows.Count > 0)
+                {
+                    editarTitulo.txtID.Text = dgvTitulos.CurrentRow.Cells["Id"].Value.ToString();
+                    editarTitulo.mskCpfCnpj.Text = dgvTitulos.CurrentRow.Cells["CPF"].Value.ToString();
+                    editarTitulo.txtNome.Text = dgvTitulos.CurrentRow.Cells["Cliente"].Value.ToString();
+                    editarTitulo.mskValorDoc.Text = dgvTitulos.CurrentRow.Cells["Valor"].Value.ToString();
+                    editarTitulo.txtNumDoc.Text = dgvTitulos.CurrentRow.Cells["Numero"].Value.ToString();
+                    editarTitulo.txtStatus.Text = dgvTitulos.CurrentRow.Cells["Status"].Value.ToString();
+                    editarTitulo.txtObs.Text = dgvTitulos.CurrentRow.Cells["Observacao"].Value.ToString();
+                    editarTitulo.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Selecione uma linha!");
+                }
             }
+
         }
 
-        private void btnRecibo_Click(object sender, EventArgs e)
-        {           
-            
+        private void btnRecibo_Click (object sender, EventArgs e)
+        {
+
             if (rbRecebedor.Checked)
             {
-                var id = dgvTitulos.Rows[dgvTitulos.CurrentCell.RowIndex].Cells["ID"].Value;
-                //Imprimir recibo = new Imprimir();
-                FastReport_Imprime recibo = new FastReport_Imprime();
-                recibo.DadosRecibo(((int)id));
+                if(dgvTitulos.SelectedRows.Count > 0)
+                {
+                    var id = dgvTitulos.Rows[dgvTitulos.CurrentCell.RowIndex].Cells["ID"].Value;
+                    //Imprimir recibo = new Imprimir();
+                    FastReport_Imprime recibo = new FastReport_Imprime();
+                    recibo.DadosRecibo(((int)id));
+                }
+                else
+                {
+                    MessageBox.Show("Selecione uma linha!");
+                }
+                
             }
             else if (rbPagador.Checked)
             {
-                var id = dgvTitulos.Rows[dgvTitulos.CurrentCell.RowIndex].Cells["ID"].Value;
-                //Imprimir recibo = new Imprimir();
-                FastReport_Imprime recibo = new FastReport_Imprime();
-                recibo.DadosRecibo(((int)id));
+                if(dgvTitulos.SelectedRows.Count >0)
+                {
+                    var id = dgvTitulos.Rows[dgvTitulos.CurrentCell.RowIndex].Cells["ID"].Value;
+                    //Imprimir recibo = new Imprimir();
+                    FastReport_Imprime recibo = new FastReport_Imprime();
+                    recibo.DadosPagamento(((int)id));
+                }
+                else
+                {
+                    MessageBox.Show("Selecione uma linha!");
+                }
+                
             }
             else
             {
@@ -65,7 +104,7 @@ namespace TccAliare.Forms
             }
         }
 
-        private void btnBuscar_Click(object sender, EventArgs e)
+        private void btnBuscar_Click (object sender, EventArgs e)
         {
 
             if (rbRecebedor.Checked)
@@ -88,7 +127,7 @@ namespace TccAliare.Forms
             {
                 PagarRepository pagarRepository = new PagarRepository();
                 var pagamentos = pagarRepository
-                .GetByNome(txtConsultaTitulo.Text);               
+                .GetByNome(txtConsultaTitulo.Text);
 
                 dgvTitulos.DataSource = pagamentos;
                 if (dgvTitulos.Rows.Count > 0)
@@ -111,7 +150,7 @@ namespace TccAliare.Forms
 
         }
 
-        private void txtConsultaTitulo_TextChanged(object sender, EventArgs e)
+        private void txtConsultaTitulo_TextChanged (object sender, EventArgs e)
         {
 
         }

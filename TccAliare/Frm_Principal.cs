@@ -197,6 +197,27 @@ namespace TccAliare
         {
             btnTitulos.ForeColor = Color.White;
         }
+
+
+        private void btnListFornece_MouseHover (object sender, EventArgs e)
+        {
+            btnListFornece.ForeColor = Color.Black;
+        }
+
+        private void btnListFornece_MouseLeave (object sender, EventArgs e)
+        {
+            btnListFornece.ForeColor = Color.White;
+        }
+
+        private void btnListTitulo_MouseHover (object sender, EventArgs e)
+        {
+            btnListTitulo.ForeColor = Color.Black;
+        }
+
+        private void btnListTitulo_MouseLeave (object sender, EventArgs e)
+        {
+            btnListTitulo.ForeColor = Color.White;
+        }
         #endregion
 
 
@@ -225,8 +246,37 @@ namespace TccAliare
                 case Keys.F2:
                 mostrarSubMenu(paneConsultar);
                 FormShow(new Frm_ListarClientes());
+                paneTitulo.BackColor = Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(195)))), ((int)(((byte)(220)))));
                 lblTitulo.Text = "Consultar Clientes";
                 break;
+
+                case Keys.F3:
+                mostrarSubMenu(paneCadastro);
+                FormShow(new Frm_CadastroFornecedor());
+                paneTitulo.BackColor = Color.White;
+                lblTitulo.Text = "Cadastrar Fornecedores";
+                break;
+
+                case Keys.F4:
+                    mostrarSubMenu(paneConsultar);
+                    FormShow(new Frm_ListarFornecedores());
+                    paneTitulo.BackColor = Color.White;
+                    lblTitulo.Text = "Consultar Fornecedores";
+                    break;
+
+                case Keys.F5:
+                    mostrarSubMenu(paneCadastro);
+                    FormShow(new Frm_CadastroTitulo());
+                    paneTitulo.BackColor = Color.FromArgb(((int)(((byte)(89)))), ((int)(((byte)(214)))), ((int)(((byte)(76)))));
+                    lblTitulo.Text = "Cadastrar Título";
+                    break;
+
+                case Keys.F6:
+                    mostrarSubMenu(paneConsultar);
+                    FormShow(new Frm_ListarTitulos());
+                    paneTitulo.BackColor = Color.FromArgb(((int)(((byte)(89)))), ((int)(((byte)(214)))), ((int)(((byte)(76)))));
+                    lblTitulo.Text = "Consultar Títulos";
+                    break;
             }
         }
 
@@ -243,22 +293,32 @@ namespace TccAliare
         {
 
             FormShow(new Frm_ListarClientes());
+            paneTitulo.BackColor = Color.FromArgb(((int) (((byte) (1)))), ((int) (((byte) (195)))), ((int) (((byte) (220)))));
+            lblTitulo.ForeColor = Color.Black;
             lblTitulo.Text = "Consulta de Clientes";
         }
         private void btnListFornece_Click (object sender, EventArgs e)
         {
             FormShow(new Frm_ListarFornecedores());
+            paneTitulo.BackColor = Color.White;
+            lblTitulo.ForeColor = Color.Black;
             lblTitulo.Text = "Consulta de Fornecedores";
         }
 
         private void btnListTitulo_Click (object sender, EventArgs e)
         {
             FormShow(new Frm_ListarTitulos());
+            paneTitulo.BackColor = Color.FromArgb(((int) (((byte) (89)))), ((int) (((byte) (214)))), ((int) (((byte) (76)))));
+            lblTitulo.ForeColor = Color.Black;
             lblTitulo.Text = "Consulta de Titulos";
         }
 
+
+
+
+
         #endregion
 
-
+       
     }
 }

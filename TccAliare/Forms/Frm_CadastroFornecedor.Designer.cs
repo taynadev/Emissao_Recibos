@@ -186,6 +186,7 @@
             this.btnCadastrar.Text = "Cadastrar";
             this.btnCadastrar.UseVisualStyleBackColor = false;
             this.btnCadastrar.Click += new System.EventHandler(this.btnCadastrar_Click);
+            this.btnCadastrar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btnCadastrar_KeyDown);
             // 
             // btnLimpar
             // 
@@ -299,6 +300,7 @@
             this.txtEstado.Enabled = false;
             this.txtEstado.Location = new System.Drawing.Point(1156, 275);
             this.txtEstado.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtEstado.MaxLength = 2;
             this.txtEstado.Name = "txtEstado";
             this.txtEstado.Size = new System.Drawing.Size(108, 26);
             this.txtEstado.TabIndex = 41;
@@ -466,6 +468,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Frm_CadastroFornecedor";
             this.Text = "Frm_CadastroFornecedor";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Frm_CadastroFornecedor_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

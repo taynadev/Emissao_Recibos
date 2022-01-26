@@ -174,7 +174,39 @@ namespace TccAliare.Forms
                     con.Save();
 
                     MessageBox.Show("Salvo com sucesso", "Mensagem de validação", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+
+                    txtNomeRazao.Text = "";
+                    txtBairro.Text = "";
+                    txtCidade.Text = "";
+                    txtComplemento.Text = "";
+                    txtEstado.Text = "";
+                    txtLogradouro.Text = "";
+                    txtNumDoc.Text = "";
+                    txtNumero.Text = "";
+                    txtObs.Text = "";
+                    txtPesquisa.Text = "";
+                    mskCep.Text = "";
+                    mskCpfCnpj.Text = "";
+                    mskValorDoc.Text = "";
+                    rbPagar.Checked = false;
+                    rbReceber.Checked = false;
+                    
                 }
+
+                mskValorDoc.Text = "";
+                txtNumDoc.Text = "";
+                txtObs.Text = "";
+                mskValorDoc.Enabled = false;
+                txtNumDoc.Enabled = false;
+                txtObs.Enabled = false;
+                rbPagar.Checked = false;
+                rbPagar.Enabled = false;
+                rbReceber.Checked = false;
+                rbReceber.Enabled = false;
+                txtPesquisa.Text = "";
+                txtPesquisa.Enabled = false;
+
                 
             }
 
@@ -203,6 +235,22 @@ namespace TccAliare.Forms
                     con.Save();
 
                     MessageBox.Show("Salvo com sucesso", "Mensagem de validação", MessageBoxButtons.OK, MessageBoxIcon.None);
+
+                    txtNomeRazao.Text = "";
+                    txtBairro.Text = "";
+                    txtCidade.Text = "";
+                    txtComplemento.Text = "";
+                    txtEstado.Text = "";
+                    txtLogradouro.Text = "";
+                    txtNumDoc.Text = "";
+                    txtNumero.Text = "";
+                    txtObs.Text = "";
+                    txtPesquisa.Text = "";
+                    mskCep.Text = "";
+                    mskCpfCnpj.Text = "";
+                    mskValorDoc.Text = "";
+                    rbPagar.Checked = false;
+                    rbReceber.Checked = false;
                 }
 
                 
@@ -219,7 +267,15 @@ namespace TccAliare.Forms
         //converte para o formato monerário com o R$
         private void mskValorDoc_Leave (object sender, EventArgs e)
         {
-            mskValorDoc.Text = Convert.ToDouble(mskValorDoc.Text).ToString("C");
+            if(mskValorDoc.Text.Replace("R$", "").Replace(",", "") != "")
+            {
+                mskValorDoc.Text = Convert.ToDouble(mskValorDoc.Text).ToString("C");
+            }
+            else
+            {
+                MessageBox.Show("Há campos obrigatorios a serem preenchidos", "Mensagem de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         //evita que letras sejam digitadas, faz com que o ponto seja substituido por virgula e que exista apenas uma virgula na string
