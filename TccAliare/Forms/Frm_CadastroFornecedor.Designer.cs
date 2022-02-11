@@ -468,6 +468,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Frm_CadastroFornecedor";
             this.Text = "Frm_CadastroFornecedor";
+            this.Load += new System.EventHandler(this.Frm_CadastroFornecedor_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Frm_CadastroFornecedor_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

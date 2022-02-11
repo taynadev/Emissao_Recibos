@@ -1,17 +1,11 @@
 ﻿using Aliare.DataBase.Repositories;
 using Newtonsoft.Json;
-using SistemaFinanceiro.Context;
 using SistemaFinanceiro.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TccAliare.ClassesSuporte;
 
@@ -457,8 +451,12 @@ namespace TccAliare.Forms
             mskValorDoc.SelectAll();
         }
 
+
         #endregion
 
-        
+        private void txtObs_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

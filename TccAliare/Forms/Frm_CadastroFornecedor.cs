@@ -2,15 +2,10 @@
 using Newtonsoft.Json;
 using SistemaFinanceiro.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TccAliare.ClassesSuporte;
 
@@ -457,6 +452,11 @@ namespace TccAliare.Forms
         private void Frm_CadastroFornecedor_KeyDown(object sender, KeyEventArgs e)
         {
            
+        }
+
+        private void Frm_CadastroFornecedor_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

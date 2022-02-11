@@ -1,13 +1,7 @@
 ﻿using Aliare.DataBase.Repositories;
 using SistemaFinanceiro.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TccAliare.Forms
@@ -330,6 +324,11 @@ namespace TccAliare.Forms
                 e.SuppressKeyPress = true;
                 return;
             }
+        }
+
+        private void Frm_CadastroTitulo_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

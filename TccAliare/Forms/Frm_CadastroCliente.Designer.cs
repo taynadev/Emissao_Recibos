@@ -328,6 +328,7 @@
             this.txtObs.Name = "txtObs";
             this.txtObs.Size = new System.Drawing.Size(698, 186);
             this.txtObs.TabIndex = 25;
+            this.txtObs.TextChanged += new System.EventHandler(this.txtObs_TextChanged);
             // 
             // txtNumDoc
             // 

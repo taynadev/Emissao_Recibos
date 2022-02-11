@@ -341,6 +341,7 @@
             this.Name = "Frm_EditarCliente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Frm_EditarCliente";
+            this.Load += new System.EventHandler(this.Frm_EditarCliente_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Frm_EditarCliente_MouseDown);
             this.ResumeLayout(false);
             this.PerformLayout();

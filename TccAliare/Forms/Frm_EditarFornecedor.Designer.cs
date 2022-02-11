@@ -340,6 +340,7 @@
             this.Name = "Frm_EditarFornecedor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Frm_EditarFornecedor";
+            this.Load += new System.EventHandler(this.Frm_EditarFornecedor_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Frm_EditarFornecedor_MouseDown);
             this.ResumeLayout(false);
             this.PerformLayout();

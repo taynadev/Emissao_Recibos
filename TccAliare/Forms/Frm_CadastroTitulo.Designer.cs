@@ -522,6 +522,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Frm_CadastroTitulo";
             this.Text = "Frm_CadastroTitulo";
+            this.Load += new System.EventHandler(this.Frm_CadastroTitulo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
